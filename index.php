@@ -8,7 +8,7 @@ $category_English_id=392;
 <?php get_header() ?>
 <?php 
 	if($tag_index==NULL) include("toppage.php");
-	else include("tag-index.php");
+	else include("tag-index2.php");
 
 	?>
 <?php get_sidebar() ?>

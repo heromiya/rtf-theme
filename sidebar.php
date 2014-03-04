@@ -1,5 +1,5 @@
 	<div id="primary" class="sidebar">
-<h3><a href="/?page_id=2729">About this website</a></h3>
+<a href="?page_id=2729" class="aboutthiswebsite"><div><h3>About this website</h3></div></a>
 		<ul class="xoxo">
 <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar(1) ) : // begin primary sidebar widgets ?>
 

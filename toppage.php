@@ -3,10 +3,10 @@
 			<div>
 				<?php 
 			if($lang == 'en'){
-				echo '<h2>Pickup</h2>';
+				echo '<h2 class="topheader-first">Pickup</h2>';
 				$cat_lang='English';
 			}elseif($lang == 'ja'){
-				echo '<h2>ピックアップ</h2>';
+				echo '<h2 class="topheader-first">ピックアップ</h2>';
 				$cat_lang='Japanese';
 			}
 			
@@ -20,25 +20,22 @@
 						'category_name'=>$cat_lang
 					);
 					query_posts( $args );
-//							if ( $sticky[0] ) {
 							
 					if ( have_posts() ) : 
 					while ( have_posts()) :
 								the_post();
-								the_post_thumbnail('thumbnail',array('align'=>'left','hspace'=>'8'));
-								  echo '<h3>';
-									echo '<a href="';
-									the_permalink();
-									echo '">';
+								echo '<a href="';
+								the_permalink();
+								echo '" class="pickuphref">';
+								echo '<div class="pickuparticle">';
+								  echo '<h3 class="pickupheader">';
 									the_title();
-									echo '</a>';
 								  echo '</h3>';
+								the_post_thumbnail(array(120,120),array('align'=>'left','hspace'=>'8'));
 								  echo '<p>';
-								  //the_content('Read more ...');
 								the_excerpt();  
-								echo '</p>';
-								
-//								}
+								echo '</p></div>';
+								echo '</a>';
 					endwhile; 
 					else:
 					endif;
@@ -49,7 +46,7 @@
 			<div id="ui-tab">
 			<?php 
 			if($lang == 'en'){
-				echo '<h2>Topics</h2>
+				echo '<h2 class="topheader">Topics</h2>
 				<ul>
 					<li><a href="#policy-tab"><span>Policy</span></a></li>
 					<li><a href="#innovation-tab"><span>Innovation</span></a></li>
@@ -63,7 +60,7 @@
 				</ul>
 				';
 				}elseif($lang == 'ja'){
-				echo '<h2>トピック</h2>
+				echo '<h2 class="topheader">トピック</h2>
 				<ul>
 					<li><a href="#policy-tab"><span>政策</span></a></li>
 					<li><a href="#innovation-tab"><span>イノベーション</span></a></li>
@@ -96,14 +93,34 @@
 			</div>			
 			<?php 
 			if($lang == 'en'){
-				echo '<h2>Latest Posts</h2>';
+				echo '<h2 class="topheader">Latest Posts</h2>';
 				query_posts('posts_per_page=10&orderby=date&order=DESC&ignore_sticky_posts=1&category_name='.$cat_lang);
 			}elseif($lang == 'ja'){
-				echo '<h2>最新の記事</h2><ul>';
+				echo '<h2 class="topheader">最新の記事</h2>';
 				query_posts('posts_per_page=10&orderby=date&order=DESC&ignore_sticky_posts=1&category_name='.$cat_lang);
 			}
 
-				if ( have_posts() ) : 
+					if ( have_posts() ) : 
+					while ( have_posts()) :
+								the_post();
+								echo '<a href="';
+								the_permalink();
+								echo '" class="pickuphref">';
+								echo '<div class="pickuparticle">';
+								  echo '<h3 class="pickupheader">';
+									the_title();
+								  echo '</h3>';
+								the_post_thumbnail(array(120,120),array('align'=>'left','hspace'=>'8'));
+								  echo '<p>';
+								the_excerpt();  
+								echo '</p></div>';
+								echo '</a>';
+					endwhile; 
+					else:
+					endif;
+
+
+/*			if ( have_posts() ) : 
 					while ( have_posts()) : the_post();
 						echo '<li><a href="';
 						the_permalink();
@@ -115,7 +132,7 @@
 						the_author();
 					endwhile; 
 				else:
-				endif;
+				endif;*/
 				wp_reset_query();
 			?>			
 			<!-- .post -->
@@ -127,14 +144,18 @@
 			
 			<?php 
 			if($lang=='en'){
-				echo '<h2>Popular Posts</h2>';
+				echo '<h2 class="topheader">Popular Posts</h2>';
+				$args = array(
+					'cat' => $category_English_id
+				);
 				}
 			elseif($lang=='ja'){
-				echo '<h2>人気の記事</h2>';
+				echo '<h2 class="topheader">人気の記事</h2>';
+				$args = array(
+					'cat' => $category_Japanese_id
+				);
+
 				}
-			$args = array(
-				'cat' => $category_English_id
-			);
 			wpp_get_mostpopular($args);
 
 			 ?>

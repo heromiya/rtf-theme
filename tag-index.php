@@ -24,6 +24,11 @@ function list_Posts($tags,$cats)
 				//the_author();
 			endwhile; 
 		else:
+			if ($lang　== 'ja') :
+				echo 'この項目の記事はありません。';
+			else:
+				echo 'No article has been posted.';
+			endif;
 		endif;
 		wp_reset_query();
     return 0;
@@ -32,7 +37,6 @@ function list_Posts($tags,$cats)
 
 <div id="container">
 	<div id="content">
-		<div>
 			<?php 
 			$tag_index_id = $wpdb->get_row("SELECT term_id FROM $wpdb->terms WHERE `name` =  '".$tag_index."'")->term_id;
 			$tag_adb_id = $wpdb->get_row("SELECT term_id FROM $wpdb->terms WHERE `name` =  'adb'")->term_id;
@@ -50,7 +54,8 @@ function list_Posts($tags,$cats)
 			$category_Needs_id =  $wpdb->get_row("SELECT term_id FROM $wpdb->terms WHERE `name` =  'Needs'")->term_id;
 			$category_Solution_id =  $wpdb->get_row("SELECT term_id FROM $wpdb->terms WHERE `name` =  'Solution'")->term_id;
 			
-			echo '<h2>'.$tag_index.'</h2>';
+			echo '<h2 class="tag-title">'.$tag_index.'</h2>';
+		echo '<div class="tag-index entry-content">';
 			echo '<h3>Specific Needs Requested</h3>';
 			list_Posts(array($tag_index_id),array($category_Needs_id));
 			echo '<h3>Specific Solution Proposed</h3>';

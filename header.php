@@ -4,6 +4,18 @@ if($lang==NULL) $lang = 'en';
 //日本語記事かどうかの判別 > post id から投稿のメタ情報を拾ってきて判別
 $category_English_id =  $wpdb->get_row("SELECT term_id FROM $wpdb->terms WHERE `name` =  'English'")->term_id;
 $category_Japanese_id =  $wpdb->get_row("SELECT term_id FROM $wpdb->terms WHERE `name` =  'Japanese'")->term_id;
+if($lang == 'en'){
+	function custom_excerpt_length( $length ) {
+		return 512;
+	}
+	add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+}
+if($lang=='ja'){
+	function custom_excerpt_length( $length ) {
+		return 256;
+	}
+	add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+}
 
 ?>
 
@@ -16,10 +28,10 @@ $category_Japanese_id =  $wpdb->get_row("SELECT term_id FROM $wpdb->terms WHERE 
 	<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('rss2_url') ?>" title="<?php printf( __( '%s latest posts', 'sandbox' ), wp_specialchars( get_bloginfo('name'), 1 ) ) ?>" />
 	<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('comments_rss2_url') ?>" title="<?php printf( __( '%s latest comments', 'sandbox' ), wp_specialchars( get_bloginfo('name'), 1 ) ) ?>" />
 	<link rel="pingback" href="<?php bloginfo('pingback_url') ?>" />
-	<script type="text/javascript" src="<?php bloginfo('home') ?>/js/ui.tabs/jquery-1.2.6.js"></script>
-	<script type="text/javascript" src="<?php bloginfo('home') ?>/js/ui.tabs/ui.core.js"></script>
-	<script type="text/javascript" src="<?php bloginfo('home') ?>/js/ui.tabs/ui.tabs.js"></script>
-	<link href="<?php bloginfo('home') ?>/js/ui.tabs/ui.tabs.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="<?php bloginfo('home') ?>/wp-content/themes/rtf/ui.tabs/jquery-1.2.6.js"></script>
+	<script type="text/javascript" src="<?php bloginfo('home') ?>/wp-content/themes/rtf/ui.tabs/ui.core.js"></script>
+	<script type="text/javascript" src="<?php bloginfo('home') ?>/wp-content/themes/rtf/ui.tabs/ui.tabs.js"></script>
+	<link href="<?php bloginfo('home') ?>/wp-content/themes/rtf/ui.tabs/ui.tabs.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
 	$(function() {
 		$('#ui-tab > ul').tabs();
